@@ -1,10 +1,10 @@
 workflows:
-  ios-build:
+  ios-build-no-sign:
     name: Build iOS IPA (No Signing)
     environment:
       xcode: latest
     scripts:
-      - name: Dodaj repo gonativeio (jeśli nie istnieje)
+      - name: Dodaj repo gonativeio
         script: |
           pod repo add gonativeio-gonative-specs https://github.com/gonativeio/gonative-specs.git || true
 
@@ -19,6 +19,7 @@ workflows:
                      -scheme DailyJournal \
                      -sdk iphoneos \
                      -configuration Release \
+                     CODE_SIGN_STYLE=Manual \
                      CODE_SIGNING_ALLOWED=NO \
                      CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGN_IDENTITY="" \
