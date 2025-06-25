@@ -2,6 +2,8 @@
 platform :ios, '13.0'
 
 source 'https://cdn.cocoapods.org/'
+source 'https://github.com/gonativeio/gonative-specs.git'  # ← to dodaj
+
 
 require_relative './plugins.rb'
 
