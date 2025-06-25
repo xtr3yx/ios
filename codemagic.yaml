@@ -12,4 +12,4 @@ workflows:
           pod install
       - name: Build IPA
         script: |
-          xcodebuild -workspace Journal.xcworkspace -scheme Journal -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $HOME/build/MyApp.xcarchive
+          xcodebuild -workspace Journal.xcodeproj  -scheme Journal -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $HOME/build/MyApp.xcarchive
