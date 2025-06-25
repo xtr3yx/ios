@@ -9,8 +9,7 @@ target default_app_target do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for GonativeIO
-  pod 'GoNativeCore'
+
   pod 'SSZipArchive'
   
   use_plugins!
