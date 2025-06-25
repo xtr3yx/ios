@@ -1,6 +1,6 @@
 workflows:
   ios-build:
-    name: Build iOS IPA
+    name: Build iOS IPA bez podpisu
     environment:
       xcode: latest
     scripts:
@@ -12,14 +12,18 @@ workflows:
           xcodebuild -workspace DailyJournal.xcworkspace \
                      -scheme DailyJournal \
                      -sdk iphoneos \
-                     -configuration Debug \
-                     -allowProvisioningUpdates \
+                     -configuration Release \
+                     -destination 'generic/platform=iOS' \
+                     CODE_SIGN_IDENTITY="" \
+                     CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_ALLOWED=NO \
                      archive -archivePath $CM_BUILD_DIR/MyApp.xcarchive
           xcodebuild -exportArchive \
                      -archivePath $CM_BUILD_DIR/MyApp.xcarchive \
                      -exportOptionsPlist exportOptions.plist \
                      -exportPath $CM_BUILD_DIR/ipa \
+                     CODE_SIGN_IDENTITY="" \
+                     CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_ALLOWED=NO
     artifacts:
       - ipa/*.ipa
