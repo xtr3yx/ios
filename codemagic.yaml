@@ -12,7 +12,15 @@ workflows:
           xcodebuild -workspace DailyJournal.xcworkspace \
                      -scheme DailyJournal \
                      -sdk iphoneos \
-                     -configuration AppStoreDistribution \
-                     archive -archivePath $CM_BUILD_DIR/MyApp.xcarchive
+                     -configuration Debug \
+                     -archivePath $CM_BUILD_DIR/MyApp.xcarchive \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGN_IDENTITY="" \
+                     DEVELOPMENT_TEAM=""
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/MyApp.xcarchive \
+                     -exportPath $CM_BUILD_DIR/ipa \
+                     -exportOptionsPlist ExportOptions.plist
     artifacts:
-      - build/ios/ipa/*.ipa
+      - ipa/*.ipa
