@@ -4,12 +4,12 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Install dependencies
+      - name: Dodaj prywatne repo CocoaPods (jeśli istnieje)
+        script: |
+          pod repo add gonativeio-gonative-specs https://github.com/gonativeio/gonative-specs.git || echo "Repo już istnieje"
+      - name: Instaluj zależności
         script: |
           pod install
-      - name: Build .ipa
+      - name: Build IPA
         script: |
-          xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -configuration Release -archivePath $CM_BUILD_DIR/build.xcarchive archive
-          xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/build.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $CM_BUILD_DIR/build
-    artifacts:
-      - build/*.ipa
+          xcodebuild -workspace Journal.xcworkspace -scheme Journal -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $HOME/build/MyApp.xcarchive
