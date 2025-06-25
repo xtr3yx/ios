@@ -13,8 +13,6 @@ workflows:
           rm -f Podfile.lock
           pod install --repo-update
 
-      - name: Build IPA bez podpisu
-       scripts:
   - name: Build IPA bez podpisu
     script: |
       xcodebuild -workspace DailyJournal.xcworkspace \
