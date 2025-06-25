@@ -1,24 +1,32 @@
 workflows:
   ios-build:
-    name: Build iOS IPA
+    name: Build iOS IPA (No Signing)
     environment:
       xcode: latest
     scripts:
-      - name: Dodaj repo GoNative
+      - name: Dodaj repo gonativeio (jeśli nie istnieje)
         script: |
           pod repo add gonativeio-gonative-specs https://github.com/gonativeio/gonative-specs.git || true
 
       - name: Instaluj zależności
         script: |
-          rm Podfile.lock || true
+          rm -f Podfile.lock
           pod install --repo-update
 
-      - name: Build IPA
+      - name: Build IPA bez podpisu
         script: |
           xcodebuild -workspace DailyJournal.xcworkspace \
                      -scheme DailyJournal \
                      -sdk iphoneos \
                      -configuration Release \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGN_IDENTITY="" \
                      archive -archivePath $CM_BUILD_DIR/MyApp.xcarchive
+
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/MyApp.xcarchive \
+                     -exportPath $CM_BUILD_DIR/ipa \
+                     -exportOptionsPlist exportOptions.plist
     artifacts:
-      - $CM_BUILD_DIR/**/MyApp.xcarchive
+      - ipa/*.ipa
