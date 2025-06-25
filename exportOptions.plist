@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
- "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
   <key>method</key>
@@ -11,12 +10,7 @@
   <false/>
   <key>stripSwiftSymbols</key>
   <true/>
-  <key>signingCertificate</key>
-  <string>Apple Development</string>
-  <key>provisioningProfiles</key>
-  <dict>
-    <key>com.example.DailyJournal</key>
-    <string>match AdHoc com.example.DailyJournal</string>
-  </dict>
+  <key>manageAppVersionAndBuildNumber</key>
+  <false/>
 </dict>
 </plist>
